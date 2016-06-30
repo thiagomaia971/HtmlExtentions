@@ -11,9 +11,9 @@ namespace HtmlExtentions.Entities
     public class TableList<T> : ITableList<T>
     {
 
-        public ICollection<T> List { get { return List; } private set { } }
+        public ICollection<T> List { get; private set; }
 
-        public ICollection<Expression<Func<T, object>>> PropertiesToShow { get { return PropertiesToShow; } private set { } }
+        public ICollection<Expression<Func<T, object>>> PropertiesToShow { get; private set;  }
 
         public TableList()
         {
@@ -24,7 +24,7 @@ namespace HtmlExtentions.Entities
         }
 
 
-        void ITableList<T>.AddToList(T Entity)
+        public void AddToList(T Entity)
         {
 
             if (Entity == null)
@@ -35,7 +35,7 @@ namespace HtmlExtentions.Entities
             List.Add(Entity);
         }
 
-        void ITableList<T>.AddToList(ICollection<T> Entities)
+        public void AddToList(ICollection<T> Entities)
         {
 
             if (Entities == null)
@@ -50,7 +50,7 @@ namespace HtmlExtentions.Entities
 
         }
 
-        void ITableList<T>.AddPropertyToShow(Expression<Func<T, object>> property)
+        public void AddPropertyToShow(Expression<Func<T, object>> property)
         {
             if (property == null)
             {

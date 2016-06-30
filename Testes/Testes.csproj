@@ -60,6 +60,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="When_A_TableListFor.cs" />
     <Compile Include="When_A_PropertiesToShow_Is.cs" />
     <Compile Include="When_A_List_T_Is.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

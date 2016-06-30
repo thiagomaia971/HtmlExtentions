@@ -172,7 +172,7 @@ namespace System.Web.Mvc
                     var button = HtmlExtentionsCommon.CreateTagBuilder("td",
                         ButtonHtmlExtention.Button(
                             htmlhelper, string.Empty,
-                            "btn-sucess col-lg-8 col-lg-offset-2", string.Empty,
+                            "btn-success col-lg-8 col-lg-offset-2", string.Empty,
                             "glyphicon glyphicon-search",
                             HtmlButtonTypes.Button,
                             new { data_action = "editar", data_actionId = item.GetType().GetProperty("Id").GetValue(item).ToString(), title = "Detalhe" }
