@@ -14,6 +14,8 @@ namespace WebApp.Models
 
         public ITableList<Usuario> Table { get; set; }
 
+        public string Nome { get; set; }
+
         public TestViewModel()
         {
             Table = new TableList<Usuario>();

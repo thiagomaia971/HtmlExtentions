@@ -108,6 +108,8 @@ namespace System.Web.Mvc
 
                 TagBuilder th = new TagBuilder("th");
 
+                th.MergeAttribute("style", "cursor: default; ");
+
                 th.InnerHtml = nameOfProperty;
 
                 tr.InnerHtml += th.ToString();
@@ -115,17 +117,17 @@ namespace System.Web.Mvc
 
             if (withEdit)
             {
-                tr.InnerHtml += HtmlExtentionsCommon.CreateTagBuilder("th", "Editar", new { style = "width: 5%" }).ToString();
+                tr.InnerHtml += HtmlExtentionsCommon.CreateTagBuilder("th", "Editar", new { style = "width: 5%; cursor: default;" }).ToString();
             }
 
             if (withDetail)
             {
-                tr.InnerHtml += HtmlExtentionsCommon.CreateTagBuilder("th", "Detalhes", new { style = "width: 5%" }).ToString();
+                tr.InnerHtml += HtmlExtentionsCommon.CreateTagBuilder("th", "Detalhes", new { style = "width: 5%; cursor: default" }).ToString();
             }
 
             if (withRemove)
             {
-                tr.InnerHtml += HtmlExtentionsCommon.CreateTagBuilder("th", "Remover", new { style = "width: 5%" }).ToString();
+                tr.InnerHtml += HtmlExtentionsCommon.CreateTagBuilder("th", "Remover", new { style = "width: 5%; cursor: default" }).ToString();
             }
 
             TagBuilder tHead = HtmlExtentionsCommon.CreateTagBuilder("thead", tr.ToString());
@@ -223,7 +225,7 @@ namespace System.Web.Mvc
             }
             else if (htmlAttributes != null)
             {
-                table.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(new { style = "margin: 10px 0px" }));
+                table.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(new { style = "margin: 10px 0px; form-group" }));
 
             }
 

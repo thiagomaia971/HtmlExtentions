@@ -11,6 +11,7 @@
     <AssemblyName>HtmlExtentions</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,16 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Html5InputTypes.cs" />
     <Compile Include="Entities\HtmlButtonTypes.cs" />
     <Compile Include="Entities\TableList.cs" />
     <Compile Include="Interfaces\ITableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\Web\Mvc\ButtonHtmlExtention.cs" />
     <Compile Include="Entities\HtmlExtentionsCommon.cs" />
+    <Compile Include="System\Web\Mvc\FormGroupHtmlExtention.cs" />
     <Compile Include="System\Web\Mvc\ImageHtmlExtention.cs" />
+    <Compile Include="System\Web\Mvc\LabelForHtmlExtention.cs" />
     <Compile Include="System\Web\Mvc\TableListForHtmlExtention.cs" />
+    <Compile Include="System\Web\Mvc\TextBoxHtmlExtention.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
