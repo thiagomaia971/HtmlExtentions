@@ -5,26 +5,28 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace HtmlExtentions.Entities
 {
-    public class TableList<T> : ITableList<T>
+    public class TableList<TEntity> : ITableList<TEntity> where TEntity : class
     {
 
-        public ICollection<T> List { get; private set; }
+        public ICollection<TEntity> List { get; private set; }
 
-        public ICollection<Expression<Func<T, object>>> PropertiesToShow { get; private set;  }
+        public ICollection<PropertyToShow> PropertiesToShow { get; private set;  }
+
 
         public TableList()
         {
 
-            List = new List<T>();
-            PropertiesToShow = new List<Expression<Func<T, object>>>();
+            List = new List<TEntity>();
+            PropertiesToShow = new List<PropertyToShow>();
 
         }
 
 
-        public void AddToList(T Entity)
+        public void AddToList(TEntity Entity)
         {
 
             if (Entity == null)
@@ -35,7 +37,7 @@ namespace HtmlExtentions.Entities
             List.Add(Entity);
         }
 
-        public void AddToList(ICollection<T> Entities)
+        public void AddToList(ICollection<TEntity> Entities)
         {
 
             if (Entities == null)
@@ -50,14 +52,20 @@ namespace HtmlExtentions.Entities
 
         }
 
-        public void AddPropertyToShow(Expression<Func<T, object>> property)
+        public void AddPropertyToShow<TProperty>(Expression<Func<TEntity, TProperty>> Property) 
         {
-            if (property == null)
+            if (Property == null)
             {
-                throw new ArgumentNullException("property", "The property Paramater don't be null.");
+                throw new ArgumentNullException("Property", "The property Paramater don't be null.");
             }
 
-            PropertiesToShow.Add(property);
+            PropertiesToShow.Add(
+                new PropertyToShow()
+                {
+                    PropertyName = HtmlExtentionsCommon.GetPropertyName(Property),
+                    DisplayProperty = HtmlExtentionsCommon.GetDisplayName(Property)
+                }
+            );
 
         }
 

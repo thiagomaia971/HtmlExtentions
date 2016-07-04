@@ -37,6 +37,8 @@ namespace System.Web.Mvc
 
             }
 
+            formGroup.AddCssClass("form-group");
+
             formGroup.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 
             ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
@@ -44,7 +46,7 @@ namespace System.Web.Mvc
             string labelText = metadata.DisplayName ?? metadata.PropertyName ?? htmlFieldName.Split('.').Last();
 
             formGroup.InnerHtml += LabelForHtmlExtention.LabelFor(htmlHelper, expression);
-            formGroup.InnerHtml += TextBoxHtmlExtention.TextBoxFor(htmlHelper, expression, labelText, labelText, true);
+            formGroup.InnerHtml += TextBoxHtmlExtention.TextBoxFor(htmlHelper, expression, labelText, labelText, autofocus);
             formGroup.InnerHtml += ValidationExtensions.ValidationMessageFor(htmlHelper, expression);
 
             return MvcHtmlString.Create(formGroup.ToString());

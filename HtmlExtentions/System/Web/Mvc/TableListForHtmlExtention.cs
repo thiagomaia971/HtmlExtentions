@@ -1,12 +1,15 @@
 ﻿using HtmlExtentions.Entities;
 using HtmlExtentions.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.WebPages.Html;
 
 namespace System.Web.Mvc
 {
@@ -22,7 +25,7 @@ namespace System.Web.Mvc
         /// <param name="htmlAttributes"></param>
 
         /// <returns></returns>
-        public static MvcHtmlString TableListFor<T>(this HtmlHelper htmlhelper,
+        public static MvcHtmlString TableListFor<TModel, T>(this HtmlHelper<TModel> htmlhelper,
             ITableList<T> viewModel,
             object htmlAttributes = null) where T : class
         {
@@ -40,7 +43,7 @@ namespace System.Web.Mvc
         /// <param name="withEdit">A boolean type for create a Table with Edit button</param>
         /// <param name="htmlAttributes"></param>
         /// <returns></returns>
-        public static MvcHtmlString TableListFor<T>(this HtmlHelper htmlhelper,
+        public static MvcHtmlString TableListFor<TModel, T>(this HtmlHelper<TModel> htmlhelper,
             ITableList<T> viewModel,
             bool withEdit = false,
             object htmlAttributes = null) where T : class
@@ -60,7 +63,7 @@ namespace System.Web.Mvc
         /// <param name="withRemove">A boolean type for create a Table with Remove button</param>
         /// <param name="htmlAttributes"></param>
         /// <returns></returns>
-        public static MvcHtmlString TableListFor<T>(this HtmlHelper htmlhelper,
+        public static MvcHtmlString TableListFor<TModel, T>(this HtmlHelper<TModel> htmlhelper,
             ITableList<T> viewModel,
             bool withEdit = false,
             bool withRemove = false,
@@ -70,6 +73,18 @@ namespace System.Web.Mvc
             return TableListForHtmlExtention.TableListFor(htmlhelper, viewModel, withEdit, withRemove, false, htmlAttributes);
 
         }
+
+        private static MvcHtmlString Test<TEntity, TAttribute>(this HtmlHelper<TEntity> htmlhelper, Expression<Func<TEntity, TAttribute>> propertyToShow)
+            where TEntity : class where TAttribute : Type
+        {
+
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(propertyToShow, htmlhelper.ViewData);
+            string htmlFieldName = ExpressionHelper.GetExpressionText(propertyToShow);
+            string labelText = metadata.DisplayName ?? metadata.PropertyName ?? htmlFieldName.Split('.').Last();
+
+            return MvcHtmlString.Create(new TagBuilder("button").ToString());
+        }
+
 
         /// <summary>
         /// Create a Table Layout.
@@ -82,12 +97,12 @@ namespace System.Web.Mvc
         /// <param name="withDetail">A boolean type for create a Table with Detail button</param>
         /// <param name="htmlAttributes"></param>
         /// <returns></returns>
-        public static MvcHtmlString TableListFor<T>(this HtmlHelper htmlhelper,
-            ITableList<T> viewModel,
+        public static MvcHtmlString TableListFor<TModel, TEntity>(this HtmlHelper<TModel> htmlhelper,
+            ITableList<TEntity> viewModel,
             bool withEdit = false,
             bool withRemove = false,
             bool withDetail = false,
-            object htmlAttributes = null) where T : class
+            object htmlAttributes = null) where TEntity : class
         {
 
             TagBuilder table = new TagBuilder("table");
@@ -95,22 +110,14 @@ namespace System.Web.Mvc
 
             TagBuilder tr = new TagBuilder("tr");
 
-            List<string> Properties = new List<string>();
-
             foreach (var propertyToShow in viewModel.PropertiesToShow)
             {
-
-                var action = propertyToShow.Body as MemberExpression;
-                var unary = propertyToShow.Body as UnaryExpression;
-
-                string nameOfProperty = (action == null ? (unary == null ? null : (unary.Operand as MemberExpression).Member.Name) : action.Member.Name);
-                Properties.Add(nameOfProperty);
 
                 TagBuilder th = new TagBuilder("th");
 
                 th.MergeAttribute("style", "cursor: default; ");
 
-                th.InnerHtml = nameOfProperty;
+                th.InnerHtml = propertyToShow.DisplayProperty != null ? propertyToShow.DisplayProperty : propertyToShow.PropertyName;
 
                 tr.InnerHtml += th.ToString();
             }
@@ -143,15 +150,21 @@ namespace System.Web.Mvc
                 foreach (var property in propertiesFromTheItem)
                 {
 
-                    var s = Properties.Where(toShow => toShow == property.Name).FirstOrDefault();
+                    PropertyToShow showThisProperty = HtmlExtentionsCommon.ShowThisProperty(property, viewModel.PropertiesToShow);
 
-                    if (s != null)
+                    var a = item.GetType().GetProperty(property.Name).GetType();
+
+                    if (showThisProperty != null)
                     {
+                        string display = showThisProperty.DisplayProperty != null ? showThisProperty.DisplayProperty : showThisProperty.PropertyName;
+
                         TagBuilder td = new TagBuilder("td");
                         td.InnerHtml = item.GetType().GetProperty(property.Name).GetValue(item).ToString();
                         td.MergeAttribute("style", "padding-top: 15px");
                         trItem.InnerHtml += td.ToString();
+
                     }
+                    
                 }
 
                 if (withEdit)

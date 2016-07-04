@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -50,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Entities\Html5InputTypes.cs" />
     <Compile Include="Entities\HtmlButtonTypes.cs" />
+    <Compile Include="Entities\PropertyToShow.cs" />
     <Compile Include="Entities\TableList.cs" />
     <Compile Include="Interfaces\ITableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
