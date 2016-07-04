@@ -28,6 +28,7 @@ namespace System.Web.Mvc
 
             rvd.Add("type", type.ToString());
             rvd.Add("class", "form-control");
+            rvd.Add("stype", "text-align: center;");
 
             if (!string.IsNullOrWhiteSpace(title))
             {
