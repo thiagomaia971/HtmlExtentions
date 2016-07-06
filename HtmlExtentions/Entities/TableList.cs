@@ -1,8 +1,10 @@
-﻿using HtmlExtentions.Interfaces;
+﻿using Core;
+using HtmlExtentions.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -64,6 +66,7 @@ namespace HtmlExtentions.Entities
                 {
                     PropertyName = HtmlExtentionsCommon.GetPropertyName(Property),
                     DisplayProperty = HtmlExtentionsCommon.GetDisplayName(Property)
+                    
                 }
             );
 

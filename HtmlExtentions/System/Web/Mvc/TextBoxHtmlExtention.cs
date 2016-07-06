@@ -18,6 +18,7 @@ namespace System.Web.Mvc
             string title = null,
             string placeholder = null,
             bool autofocus = false,
+            bool required = false,
             Html5InputTypes type = Html5InputTypes.Text,
             object htmlAttributes = null
             )
@@ -29,6 +30,11 @@ namespace System.Web.Mvc
             rvd.Add("type", type.ToString());
             rvd.Add("class", "form-control");
             rvd.Add("stype", "text-align: center;");
+
+            if (required)
+            {
+                rvd.Add("required", "");
+            }
 
             if (!string.IsNullOrWhiteSpace(title))
             {

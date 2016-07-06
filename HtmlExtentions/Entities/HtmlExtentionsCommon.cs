@@ -103,6 +103,25 @@ namespace HtmlExtentions.Entities
             return CustomAttributeData.GetCustomAttributes(typeof(DisplayAttribute)).ToString();
         }
 
+        //public static string GetValue<T>(T item, PropertyInfo Property)
+        //{
+
+        //    object value = null;
+
+        //    foreach (var prop in item.GetType().GetProperties())
+        //    {
+
+        //        if (prop.PropertyType.GetProperties().Count() > 0)
+        //        {
+
+
+
+        //        }
+
+        //    }
+
+        //}
+
         public static string GetPropertyName<T, P>(Expression<Func<T,P>> exp ) where T : class
         {
             var member = exp.Body as MemberExpression;
@@ -114,6 +133,23 @@ namespace HtmlExtentions.Entities
             }
 
             return member.Member.Name;
+        }
+
+        public static string GetFullName<T>(this T src, PropertyInfo property) where T: class
+        {
+
+            var member = property.PropertyType.FullName;
+
+            
+            if (member.Split('.').Count() > 0)
+            {
+
+                member = typeof(T).GetFullName(typeof(T).GetProperty(member.Split('.')[0]));
+
+
+            }
+            return member;
+
         }
 
         public static Expression<Func<TInput, object>> ConvertExpressionToObjectOutput<TInput, TOutput>(Expression<Func<TInput, TOutput>> expression) where TOutput : Attribute
@@ -134,12 +170,65 @@ namespace HtmlExtentions.Entities
 
         }
 
-        public static PropertyToShow ShowThisProperty(PropertyInfo Property, ICollection<PropertyToShow> PropertiesToShow)
+        public static PropertyToShow ShowThisProperty<TEntity>(PropertyInfo Property, ICollection<PropertyToShow> PropertiesToShow, TEntity entity) where TEntity : class
         {
 
-            return PropertiesToShow.Where(p => p.PropertyName == GetPropertyName((PropertyInfo a) => Property)).FirstOrDefault();
+            PropertyToShow isShow = null;
+
+            if (Property.PropertyType.GetProperties().Count() > 0)
+            {
+
+                foreach (PropertyInfo p in Property.PropertyType.GetProperties())
+                {
+
+                    if (PropertiesToShow.Where(pt => pt.PropertyName == p.Name).FirstOrDefault() != null)
+                    {
+
+                        isShow = PropertiesToShow.Where(pt => pt.PropertyName == p.Name).FirstOrDefault();
+
+                        if (isShow != null)
+                        {
+
+
+                            isShow.Value = entity.GetType().GetProperty(isShow.PropertyName).GetValue(entity);
+
+                        }
+
+                    }
+
+                }
+
+                if (isShow == null)
+                {
+                    isShow = PropertiesToShow.Where(pt => pt.PropertyName == Property.Name).FirstOrDefault();
+                    if (isShow != null)
+                    {
+
+
+                        isShow.Value = entity.GetType().GetProperty(isShow.PropertyName).GetValue(entity);
+
+                    }
+                }
+
+            }
+            else
+            {
+                isShow = PropertiesToShow.Where(pt => pt.PropertyName == Property.Name).FirstOrDefault();
+
+                if (isShow != null)
+                {
+                
+
+                    isShow.Value = entity.GetType().GetProperty(isShow.PropertyName).GetValue(entity);
+
+                }
+            }
+
+
+            return isShow;
 
         }
+
 
     }
 }

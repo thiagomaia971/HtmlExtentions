@@ -22,6 +22,7 @@ namespace WebApp.Models
 
             Table.AddToList(new Usuario() { Id = 1, Login = "asd", Nome = "Fulano", Perfil = new Perfil() { Tipo = "test" } });
             Table.AddToList(new Usuario() { Id = 2, Login = "cxv", Nome = "Tal" });
+            
 
 
             Table.AddPropertyToShow(x => x.Login);

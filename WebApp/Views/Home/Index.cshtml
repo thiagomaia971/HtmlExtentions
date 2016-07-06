@@ -6,12 +6,8 @@
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
 
-
-    @Html.FormGroupFor(m => m.Nome, true, "col-lg-12")
-
     @Html.TableListFor(Model.Table, true, true, true)
-    @Html.FormGroupFor(m => m.Nome, false, "col-lg-6")
-    @Html.FormGroupFor(m => m.Nome, false, "col-lg-4")
+
 
 }
 

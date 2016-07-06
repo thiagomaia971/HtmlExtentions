@@ -11,6 +11,7 @@ namespace System.Web.Mvc
 
         public string PropertyName { get; set; }
         public string DisplayProperty { get; set; }
+        public object Value { get; set; }
 
     }
 }

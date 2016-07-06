@@ -150,7 +150,8 @@ namespace System.Web.Mvc
                 foreach (var property in propertiesFromTheItem)
                 {
 
-                    PropertyToShow showThisProperty = HtmlExtentionsCommon.ShowThisProperty(property, viewModel.PropertiesToShow);
+
+                    PropertyToShow showThisProperty = HtmlExtentionsCommon.ShowThisProperty(property, viewModel.PropertiesToShow, item);
 
                     var a = item.GetType().GetProperty(property.Name).GetType();
 

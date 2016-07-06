@@ -16,6 +16,8 @@ namespace System.Web.Mvc
         public static MvcHtmlString FormGroupFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TValue>> expression,
             bool autofocus = false,
+            Html5InputTypes type = Html5InputTypes.Text,
+            bool required = false,
             string cssClass = null,
             object htmlAttributes = null
             )
@@ -45,8 +47,8 @@ namespace System.Web.Mvc
             string htmlFieldName = ExpressionHelper.GetExpressionText(expression);
             string labelText = metadata.DisplayName ?? metadata.PropertyName ?? htmlFieldName.Split('.').Last();
 
+            formGroup.InnerHtml += TextBoxHtmlExtention.TextBoxFor(htmlHelper, expression, labelText, string.Empty, autofocus, required, type);
             formGroup.InnerHtml += LabelForHtmlExtention.LabelFor(htmlHelper, expression);
-            formGroup.InnerHtml += TextBoxHtmlExtention.TextBoxFor(htmlHelper, expression, labelText, labelText, autofocus);
             formGroup.InnerHtml += ValidationExtensions.ValidationMessageFor(htmlHelper, expression);
 
             return MvcHtmlString.Create(formGroup.ToString());
