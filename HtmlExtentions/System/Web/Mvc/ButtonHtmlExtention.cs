@@ -61,12 +61,12 @@ namespace System.Web.Mvc
         public static MvcHtmlString Button(this HtmlHelper htmlHelper,
           string innerHtml,
           string cssClass,
-          string name,
+          string glyphicon,
           HtmlButtonTypes buttonType = null,
           object htmlAttributes = null
           )
         {
-            return ButtonHtmlExtention.Button(htmlHelper, innerHtml, cssClass, name, string.Empty, buttonType, htmlAttributes);
+            return ButtonHtmlExtention.Button(htmlHelper, innerHtml, cssClass, glyphicon, string.Empty, buttonType, htmlAttributes);
         }
 
 
@@ -84,8 +84,8 @@ namespace System.Web.Mvc
         public static MvcHtmlString Button(this HtmlHelper htmlHelper,
             string innerHtml,
             string cssClass,
-            string name,
             string glyphicon,
+            string name,
             HtmlButtonTypes buttonType = null,
             object htmlAttributes = null
             )
@@ -114,17 +114,22 @@ namespace System.Web.Mvc
 
             if (!string.IsNullOrWhiteSpace(glyphicon))
             {
-                if (glyphicon.Contains("glyphicon-"))
-                {
-                    TagBuilder span = new TagBuilder("span");
-                    span.AddCssClass(glyphicon);
-                    span.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(new { aria_hidden = "true" }));
 
+                TagBuilder span = new TagBuilder("span");
+                span.AddCssClass(glyphicon);
+                span.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(new { aria_hidden = "true" }));
 
-                    tb.InnerHtml = span.ToString() + " ";
-                }
+                span.InnerHtml = " " + innerHtml;
+
+                tb.InnerHtml = span.ToString() + " ";
+
             }
-            tb.InnerHtml += innerHtml;
+            else
+            {
+
+                tb.InnerHtml += innerHtml;
+
+            }
 
             if (buttonType == null || string.IsNullOrWhiteSpace(buttonType.Value))
             {

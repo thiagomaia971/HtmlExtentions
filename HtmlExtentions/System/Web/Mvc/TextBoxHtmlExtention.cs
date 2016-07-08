@@ -20,6 +20,7 @@ namespace System.Web.Mvc
             bool autofocus = false,
             bool required = false,
             Html5InputTypes type = Html5InputTypes.Text,
+            string icon = null,
             object htmlAttributes = null
             )
         {
@@ -49,6 +50,13 @@ namespace System.Web.Mvc
             if (autofocus)
             {
                 rvd.Add("autofocus", "");
+            }
+
+            if (!string.IsNullOrEmpty(icon))
+            {
+
+                
+
             }
 
             return InputExtensions.TextBoxFor(htmlHelper, expression, rvd);

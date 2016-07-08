@@ -190,7 +190,7 @@ namespace HtmlExtentions.Entities
                         {
 
 
-                            isShow.Value = entity.GetType().GetProperty(isShow.PropertyName).GetValue(entity);
+                            isShow.Value = entity.GetType().GetProperty(Property.Name).GetType().GetProperty(p.Name).GetValue(entity);
 
                         }
 

@@ -152,8 +152,7 @@ namespace System.Web.Mvc
 
 
                     PropertyToShow showThisProperty = HtmlExtentionsCommon.ShowThisProperty(property, viewModel.PropertiesToShow, item);
-
-                    var a = item.GetType().GetProperty(property.Name).GetType();
+                    
 
                     if (showThisProperty != null)
                     {

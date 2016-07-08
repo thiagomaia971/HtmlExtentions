@@ -26,7 +26,7 @@ namespace WebApp.Models
 
 
             Table.AddPropertyToShow(x => x.Login);
-            Table.AddPropertyToShow(x => x.Perfil.Tipo);
+            Table.AddPropertyToShow(x => x.Nome);
         }
 
     }

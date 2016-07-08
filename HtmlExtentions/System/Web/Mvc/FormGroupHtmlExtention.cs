@@ -18,6 +18,7 @@ namespace System.Web.Mvc
             bool autofocus = false,
             Html5InputTypes type = Html5InputTypes.Text,
             bool required = false,
+            string icon = null,
             string cssClass = null,
             object htmlAttributes = null
             )
@@ -40,6 +41,23 @@ namespace System.Web.Mvc
             }
 
             formGroup.AddCssClass("form-group");
+
+            if (!string.IsNullOrEmpty(icon))
+            {
+
+                TagBuilder div = new TagBuilder("div");
+                div.AddCssClass("icon-div");
+
+                TagBuilder iconTb = new TagBuilder("i");
+                iconTb.AddCssClass("icon-input");
+                iconTb.AddCssClass(icon);
+
+                div.InnerHtml = iconTb.ToString();
+
+                formGroup.InnerHtml += div.ToString();
+
+            }
+
 
             formGroup.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 

@@ -37,3 +37,18 @@ input:focus ~ label, input:valid ~ label{
     color: #2196f3;
     font-weight: bold;
 }
+
+.icon-div{
+
+    float: right;
+    margin-right: 20px;
+
+}
+
+.icon-input{
+
+    position: absolute;
+    margin-top: 15px;
+    color: #2196f3;
+
+}
