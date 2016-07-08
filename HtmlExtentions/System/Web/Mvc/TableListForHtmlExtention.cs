@@ -172,8 +172,9 @@ namespace System.Web.Mvc
                     var button = HtmlExtentionsCommon.CreateTagBuilder("td",
                         ButtonHtmlExtention.Button(
                             htmlhelper, string.Empty,
-                            "btn-info col-lg-12", string.Empty,
+                            "btn-info col-lg-12",
                             "glyphicon glyphicon-edit",
+                            string.Empty,
                             HtmlButtonTypes.Button,
                             new { data_action = "editar", data_actionId = item.GetType().GetProperty("Id").GetValue(item).ToString(), title = "Editar" }
                         ).ToString());
@@ -187,8 +188,9 @@ namespace System.Web.Mvc
                     var button = HtmlExtentionsCommon.CreateTagBuilder("td",
                         ButtonHtmlExtention.Button(
                             htmlhelper, string.Empty,
-                            "btn-success col-lg-8 col-lg-offset-2", string.Empty,
+                            "btn-success col-lg-8 col-lg-offset-2",
                             "glyphicon glyphicon-search",
+                            string.Empty,
                             HtmlButtonTypes.Button,
                             new { data_action = "editar", data_actionId = item.GetType().GetProperty("Id").GetValue(item).ToString(), title = "Detalhe" }
                         ).ToString());
@@ -202,8 +204,9 @@ namespace System.Web.Mvc
                     var button = HtmlExtentionsCommon.CreateTagBuilder("td",
                         ButtonHtmlExtention.Button(
                             htmlhelper, string.Empty,
-                            "btn-danger col-lg-8 col-lg-offset-2", string.Empty,
+                            "btn-danger col-lg-8 col-lg-offset-2",
                             "glyphicon glyphicon-trash",
+                            string.Empty,
                             HtmlButtonTypes.Button,
                             new { data_action = "remover", data_actionId = item.GetType().GetProperty("Id").GetValue(item).ToString(), title = "Remover" }
                         ).ToString());
