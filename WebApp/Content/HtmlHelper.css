@@ -19,20 +19,20 @@ input:focus {
 
 label {
     color: #999;
-    font-size: 17px;
+    font-size: 1.0em;
     position: absolute;
     pointer-events: none;
     font-weight: bold;
-    left: 15px;
-    top: 5px;
+    left: 25px;
+    top: 10px;
     -moz-transition: 0.25s ease all;
     -webkit-transition: 0.25s ease all;
     transition: 0.25s ease all;
 }
 
-input:focus ~ label, input:valid ~ label{
+.inputFocus{
     top: -55%;
-    left: 0px;
+    left: 15px;
     font-size: 14px;
     color: #2196f3;
     font-weight: bold;
@@ -51,4 +51,9 @@ input:focus ~ label, input:valid ~ label{
     margin-top: 15px;
     color: #2196f3;
 
+}
+
+.field-validation-error{
+    position: absolute;
+    font-size: 12px;
 }

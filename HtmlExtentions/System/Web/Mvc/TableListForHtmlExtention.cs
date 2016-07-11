@@ -188,7 +188,7 @@ namespace System.Web.Mvc
                     var button = HtmlExtentionsCommon.CreateTagBuilder("td",
                         ButtonHtmlExtention.Button(
                             htmlhelper, string.Empty,
-                            "btn-success col-lg-8 col-lg-offset-2",
+                            "btn-success col-lg-10 col-lg-offset-1",
                             "glyphicon glyphicon-search",
                             string.Empty,
                             HtmlButtonTypes.Button,
@@ -204,7 +204,7 @@ namespace System.Web.Mvc
                     var button = HtmlExtentionsCommon.CreateTagBuilder("td",
                         ButtonHtmlExtention.Button(
                             htmlhelper, string.Empty,
-                            "btn-danger col-lg-8 col-lg-offset-2",
+                            "btn-danger col-lg-10 col-lg-offset-1",
                             "glyphicon glyphicon-trash",
                             string.Empty,
                             HtmlButtonTypes.Button,
